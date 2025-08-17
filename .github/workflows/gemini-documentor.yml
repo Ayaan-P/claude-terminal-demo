@@ -1,0 +1,54 @@
+# .github/workflows/ai-librarian.yaml
+
+name: AI Librarian (Corrected Goal-Oriented Workflow)
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  curate-and-document:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Gemini CLI
+        run: npm install -g @google/gemini-cli
+
+      - name: Run the AI Librarian Agent
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          gemini -m "gemini-2.5-flash" -p "You are an autonomous AI software engineer assigned to this repository. Your sole responsibility is to keep the documentation accurate and clear. A new commit has just been pushed. Analyze the changes and update any and all relevant documentation files to reflect the new state of the code. You have access to shell commands to read files, see git history, and write file changes. Use them as needed to accomplish your goal." -y
+      - name: Check for any changes (staged or unstaged)
+        id: check_changes
+        run: |
+          if ! git diff --quiet || ! git diff --cached --quiet; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Create PR with Librarian's Work
+        if: steps.check_changes.outputs.changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.email "librarian@github.com"
+          git config user.name "AI Librarian (Gemini)"
+          git checkout -b "docs/curation-$(date +%s)"
+          git add .
+          git commit -m "docs: AI Librarian documentation update"
+          git push origin HEAD
+          gh pr create --title "📖 From the Librarian: Documentation Update" --body "The AI Librarian has analyzed the latest commit and updated the repository's documentation. Please review the changes."

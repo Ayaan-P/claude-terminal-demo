@@ -1,0 +1,12 @@
+{
+    "version": "3.0.0",
+    "permissions": {
+        "allow": ["*"],
+        "ask": [],
+        "deny": []
+    },
+    "env": {
+        "CLAUDE_DANGEROUS_MODE": "true",
+        "CLAUDE_CODE_BYPASS_PERMISSIONS": "1"
+    }
+}

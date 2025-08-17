@@ -1,0 +1,246 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    background-color: #0a0a0a;
+    color: #00ff00;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.terminal-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+.terminal-header {
+    background-color: #2a2a2a;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    user-select: none;
+}
+
+.terminal-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.control.close {
+    background-color: #ff5f56;
+}
+
+.control.minimize {
+    background-color: #ffbd2e;
+}
+
+.control.maximize {
+    background-color: #27ca3f;
+}
+
+.terminal-title {
+    flex: 1;
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.terminal-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #0a0a0a;
+    padding: 15px;
+    overflow: hidden;
+}
+
+.terminal-output {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 15px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.welcome-message {
+    margin-bottom: 20px;
+}
+
+.ascii-art {
+    color: #00ffff;
+    font-size: 10px;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    white-space: pre;
+}
+
+.welcome-text {
+    color: #00ff00;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.help-text {
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.examples {
+    margin-left: 10px;
+}
+
+.examples div {
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.terminal-input-line {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+    border-top: 1px solid #333;
+    padding-top: 10px;
+}
+
+.prompt {
+    color: #00ff00;
+    font-weight: bold;
+    margin-right: 8px;
+    white-space: nowrap;
+}
+
+.terminal-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #00ff00;
+    font-family: inherit;
+    font-size: 14px;
+    caret-color: #00ff00;
+}
+
+.terminal-input::placeholder {
+    color: #555;
+}
+
+.output-line {
+    margin-bottom: 8px;
+    word-wrap: break-word;
+}
+
+.command-line {
+    color: #00ff00;
+    margin-bottom: 5px;
+}
+
+.command-line .prompt {
+    color: #00ff00;
+}
+
+.command-line .command {
+    color: #ffffff;
+}
+
+.response-line {
+    color: #cccccc;
+    margin-left: 20px;
+    white-space: pre-wrap;
+}
+
+.error-line {
+    color: #ff4444;
+    margin-left: 20px;
+}
+
+.status-line {
+    color: #888;
+    font-style: italic;
+    margin-left: 20px;
+}
+
+.status-bar {
+    background-color: #2a2a2a;
+    padding: 5px 15px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #888;
+    border-top: 1px solid #333;
+}
+
+#connection-status.connected {
+    color: #00ff00;
+}
+
+#connection-status.connecting {
+    color: #ffbd2e;
+}
+
+#connection-status.disconnected {
+    color: #ff5f56;
+}
+
+/* Scrollbar styling */
+.terminal-output::-webkit-scrollbar {
+    width: 8px;
+}
+
+.terminal-output::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+.terminal-output::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+.terminal-output::-webkit-scrollbar-thumb:hover {
+    background: #444;
+}
+
+/* Cursor blink animation */
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.terminal-input {
+    animation: blink 1s infinite;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .terminal-container {
+        border-radius: 0;
+        height: 100vh;
+    }
+    
+    .ascii-art {
+        font-size: 8px;
+    }
+    
+    .terminal-input {
+        font-size: 16px; /* Prevent zoom on mobile */
+    }
+}

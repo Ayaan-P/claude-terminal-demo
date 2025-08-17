@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code Terminal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <div class="terminal-controls">
+                <span class="control close"></span>
+                <span class="control minimize"></span>
+                <span class="control maximize"></span>
+            </div>
+            <div class="terminal-title">Claude Code Terminal</div>
+        </div>
+        <div class="terminal-body">
+            <div id="output" class="terminal-output">
+                <div class="welcome-message">
+                    <div class="ascii-art">
+   _____ _                 _        _____          _      
+  / ____| |               | |      / ____|        | |     
+ | |    | | __ _ _   _  __| | ___ | |     ___   __| | ___ 
+ | |    | |/ _` | | | |/ _` |/ _ \| |    / _ \ / _` |/ _ \
+ | |____| | (_| | |_| | (_| |  __/| |___| (_) | (_| |  __/
+  \_____|_|\__,_|\__,_|\__,_|\___| \_____\___/ \__,_|\___|
+                    </div>
+                    <div class="welcome-text">Welcome to Claude Code Terminal Interface</div>
+                    <div class="help-text">Type your natural language commands below. Examples:</div>
+                    <div class="examples">
+                        <div>• "Create a new Python file called hello.py"</div>
+                        <div>• "List all files in the current directory"</div>
+                        <div>• "Help me debug this JavaScript function"</div>
+                    </div>
+                </div>
+            </div>
+            <div class="terminal-input-line">
+                <span class="prompt">claude@terminal:~$ </span>
+                <input type="text" id="commandInput" class="terminal-input" placeholder="Enter your command..." autofocus>
+            </div>
+        </div>
+    </div>
+    <div class="status-bar">
+        <span id="status">Ready</span>
+        <span id="connection-status">Disconnected</span>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
